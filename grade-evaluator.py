@@ -1,11 +1,12 @@
-mport csv
+import csv
 import os
 
 FILE_NAME = "grades.csv"
 
 def read_csv():
     if not os.path.exists(FILE_NAME):
-        print("❌ grades.csv file not found.")
+        print("--------------------------------------------------------------")
+        print(" -----grades.csv file not found.-----")
         return []
 
     with open(FILE_NAME, "r") as file:
@@ -13,7 +14,8 @@ def read_csv():
         data = list(reader)
 
         if not data:
-            print("⚠️ grades.csv is empty.")
+            print("--------------------------------------------------------------")
+            print("-----grades.csv is empty.-----")
             return []
 
         return data
@@ -23,7 +25,7 @@ def validate_scores(data):
     for row in data:
         score = float(row["score"])
         if score < 0 or score > 100:
-            print(f"❌ Invalid score: {score}")
+            print(f"Invalid score: {score}")
             return False
     return True
 
@@ -43,11 +45,13 @@ def validate_weights(data):
             summative += weight
 
     if total_weight != 100:
-        print("❌ Total weight must be 100")
+        print("------------------------Invalid total weight.----------------------")
+        print("-----Total weight must be 100-----")
         return False
 
     if formative != 60 or summative != 40:
-        print("❌ Formative must be 60 and Summative must be 40")
+        print("------------------------Invalid category weights.----------------------")
+        print("-----Formative must be 60 and Summative must be 40-----")
         return False
 
     return True
@@ -94,14 +98,15 @@ def calculate_results(data):
     else:
         status = "FAILED"
 
-    print(f"\n📊 GPA: {round(gpa, 2)}")
-    print(f"📌 Status: {status}")
+    print("------------------------RESULTS----------------------")
+    print(f"GPA: {round(gpa, 2)}")
+    print(f"Status: {status}")
 
     # Resubmission
     if status == "FAILED" and failed_formative:
         max_weight = max(float(row["weight"]) for row in failed_formative)
 
-        print("\n🔁 Resubmit these assignments:")
+        print("\n Resubmit these assignments:")
         for row in failed_formative:
             if float(row["weight"]) == max_weight:
                 print(f"- {row['assignment']} (Weight: {row['weight']})")
@@ -122,4 +127,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main(
+    main()
+

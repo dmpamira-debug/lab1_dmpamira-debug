@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FILE="grade.csv"
+FILE="grades.csv"
 ARCHIVE="archive"
 LOG="organizer.log"
 
